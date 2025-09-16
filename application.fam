@@ -1,0 +1,20 @@
+App(
+    appid="esp_flasher_rtl",
+    name="ESP/RTL Flasher",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="esp_flasher_app",
+    stack_size=8 * 1024,
+    fap_category="GPIO",
+    fap_description="ESP32/ESP8266 and RTL8710BN WiFi chip flasher",
+    fap_author="noweheere",
+    fap_version="1.0",
+    fap_icon="esp_flasher_icon.png",
+    fap_libs=["assets"],
+    requires=[
+        "gui",
+        "dialogs",
+        "storage",
+        "notification",
+        "expansion",
+    ],
+)

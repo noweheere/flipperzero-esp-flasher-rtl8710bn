@@ -1,0 +1,7 @@
+ADD_SCENE(esp_flasher, start, Start)
+ADD_SCENE(esp_flasher, select_chip, SelectChip)
+ADD_SCENE(esp_flasher, select_firmware, SelectFirmware)
+ADD_SCENE(esp_flasher, wiring, Wiring)
+ADD_SCENE(esp_flasher, flashing, Flashing)
+ADD_SCENE(esp_flasher, success, Success)
+ADD_SCENE(esp_flasher, error, Error)
