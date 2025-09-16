@@ -8,14 +8,14 @@
 #define RTL8710BN_SECTOR_SIZE 0x1000   // 4KB
 
 // RTL8710BN UART configuration
-#define RTL8710BN_UART_TX_PIN gpio_ext_pa29
-#define RTL8710BN_UART_RX_PIN gpio_ext_pa30
+#define RTL8710BN_UART_TX_PIN &gpio_ext_pa7
+#define RTL8710BN_UART_RX_PIN &gpio_ext_pa6
 #define RTL8710BN_DOWNLOAD_BAUDRATE 115200
 #define RTL8710BN_FLASH_BAUDRATE 460800
 
 // Download mode control pins
-#define RTL8710BN_CEN_PIN gpio_ext_pc0
-#define RTL8710BN_TX2_PIN gpio_ext_pc1
+#define RTL8710BN_CEN_PIN &gpio_ext_pc0
+#define RTL8710BN_TX2_PIN &gpio_ext_pc1
 
 typedef enum {
     RTL8710BNCommandSync = 0x08,

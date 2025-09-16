@@ -13,6 +13,7 @@
 #include <storage/storage.h>
 #include <notification/notification_messages.h>
 #include <expansion/expansion.h>
+#include <toolbox/path.h>
 
 #define ESP_FLASHER_APP_FOLDER "/ext/esp_flasher"
 #define ESP_FLASHER_MAX_FILE_NAME_LEN 255
@@ -35,7 +36,6 @@ typedef enum {
 
 typedef enum {
     EspFlasherSceneStart,
-    EspFlasherSceneSelectChip,
     EspFlasherSceneSelectFirmware,
     EspFlasherSceneWiring,
     EspFlasherSceneFlashing,

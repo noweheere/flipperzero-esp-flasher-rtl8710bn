@@ -2,6 +2,7 @@
 #include <furi_hal_serial.h>
 #include <furi_hal_gpio.h>
 #include <storage/storage.h>
+#include <furi_hal_resources.h>
 
 #define RTL_SYNC_TIMEOUT_MS 5000
 #define RTL_RESPONSE_TIMEOUT_MS 1000
@@ -32,12 +33,12 @@ bool rtl8710bn_init(RTL8710BNContext* ctx) {
     furi_hal_serial_init(ctx->serial_handle, RTL8710BN_DOWNLOAD_BAUDRATE);
     
     // Configure GPIO pins for download mode control
-    furi_hal_gpio_init_simple(&RTL8710BN_CEN_PIN, GpioModeOutputPushPull);
-    furi_hal_gpio_init_simple(&RTL8710BN_TX2_PIN, GpioModeOutputPushPull);
+    furi_hal_gpio_init_simple(RTL8710BN_CEN_PIN, GpioModeOutputPushPull);
+    furi_hal_gpio_init_simple(RTL8710BN_TX2_PIN, GpioModeOutputPushPull);
     
     // Set default pin states (not in download mode)
-    furi_hal_gpio_write(&RTL8710BN_CEN_PIN, true);  // CEN high
-    furi_hal_gpio_write(&RTL8710BN_TX2_PIN, true);  // TX2 high
+    furi_hal_gpio_write(RTL8710BN_CEN_PIN, true);  // CEN high
+    furi_hal_gpio_write(RTL8710BN_TX2_PIN, true);  // TX2 high
     
     ctx->flash_size = RTL8710BN_FLASH_SIZE;
     ctx->sector_size = RTL8710BN_SECTOR_SIZE;
@@ -55,8 +56,8 @@ void rtl8710bn_deinit(RTL8710BNContext* ctx) {
     }
     
     // Reset GPIO pins
-    furi_hal_gpio_init_simple(&RTL8710BN_CEN_PIN, GpioModeAnalog);
-    furi_hal_gpio_init_simple(&RTL8710BN_TX2_PIN, GpioModeAnalog);
+    furi_hal_gpio_init_simple(RTL8710BN_CEN_PIN, GpioModeAnalog);
+    furi_hal_gpio_init_simple(RTL8710BN_TX2_PIN, GpioModeAnalog);
     
     ctx->connected = false;
 }
@@ -67,16 +68,16 @@ bool rtl8710bn_enter_download_mode(RTL8710BNContext* ctx) {
     FURI_LOG_I("RTL8710BN", "Entering download mode");
     
     // RTL8710BN download mode sequence: CEN + TX2 to GND
-    furi_hal_gpio_write(&RTL8710BN_CEN_PIN, false);  // CEN to GND
-    furi_hal_gpio_write(&RTL8710BN_TX2_PIN, false);  // TX2 to GND
+    furi_hal_gpio_write(RTL8710BN_CEN_PIN, false);  // CEN to GND
+    furi_hal_gpio_write(RTL8710BN_TX2_PIN, false);  // TX2 to GND
     furi_delay_ms(100);
     
     // Release CEN while keeping TX2 low
-    furi_hal_gpio_write(&RTL8710BN_CEN_PIN, true);   // Release CEN
+    furi_hal_gpio_write(RTL8710BN_CEN_PIN, true);   // Release CEN
     furi_delay_ms(100);
     
     // Release TX2
-    furi_hal_gpio_write(&RTL8710BN_TX2_PIN, true);   // Release TX2
+    furi_hal_gpio_write(RTL8710BN_TX2_PIN, true);   // Release TX2
     furi_delay_ms(100);
     
     return true;
@@ -88,9 +89,9 @@ bool rtl8710bn_exit_download_mode(RTL8710BNContext* ctx) {
     FURI_LOG_I("RTL8710BN", "Exiting download mode");
     
     // Reset the chip
-    furi_hal_gpio_write(&RTL8710BN_CEN_PIN, false);
+    furi_hal_gpio_write(RTL8710BN_CEN_PIN, false);
     furi_delay_ms(100);
-    furi_hal_gpio_write(&RTL8710BN_CEN_PIN, true);
+    furi_hal_gpio_write(RTL8710BN_CEN_PIN, true);
     
     return true;
 }
