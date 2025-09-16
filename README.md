@@ -73,9 +73,55 @@ This flasher works seamlessly with [LibreTiny](https://github.com/libretiny-eu/l
 
 This project requires the Flipper Zero firmware development environment:
 
-```bash
-ufbt build
+### Prerequisites
+- Install ufbt (Flipper Zero build tool):
+  ```bash
+  pip install ufbt
+  ```
+
+### Build Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/noweheere/flipperzero-esp-flasher-rtl8710bn.git
+   cd flipperzero-esp-flasher-rtl8710bn
+   ```
+
+2. Verify all components (optional):
+   ```bash
+   ./verify_app.sh
+   ```
+
+3. Build the application:
+   ```bash
+   ufbt
+   ```
+
+4. Install to Flipper Zero:
+   ```bash
+   ufbt launch
+   ```
+
+### Manual Installation
+Copy the generated `dist/esp_flasher_rtl.fap` file to your Flipper Zero SD card:
 ```
+/ext/apps/GPIO/esp_flasher_rtl.fap
+```
+
+## Usage
+
+1. **Launch**: Apps → GPIO → ESP/RTL Flasher
+2. **Select Chip Type**: Choose ESP32 family or RTL8710BN
+3. **Wiring**: Follow the built-in wiring diagrams
+4. **Select Files**: Browse and choose your .bin firmware files
+5. **Flash**: Start the flashing process
+
+### File Requirements
+- **ESP32**: Use .bin files (bootloader, partition table, application)
+- **RTL8710BN**: Use LibreTiny-compatible .bin files
+
+### Power Requirements
+- **ESP32**: Can use Flipper's 3.3V or external supply
+- **RTL8710BN**: **Requires external 3.3V power supply**
 
 ## Documentation
 
